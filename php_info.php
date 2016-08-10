@@ -1,4 +1,4 @@
-<h5>Misc.:</h5>
+<h5>Misc:</h5>
 <?php
 
 echo "Data Processed @";
@@ -22,6 +22,8 @@ $string = $string1 . $string2;
 
 echo $string;
 ?>
+
+
 
 <hr/>
 
@@ -77,5 +79,3 @@ echo "<br/>or if you want to make it a full integer. It is = " . (integer) (4352
 	
 	echo "<br/>I am picking one of these words from the array and it is " . "'$foo[1]'" ;	
 ?>
-
-
