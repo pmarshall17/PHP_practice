@@ -1,19 +1,23 @@
 <?php 
-	echo "Welcome to the Prestman Auto Search Form" ;
+	$image_url='http://www.prestmanservice.com/wp-content/uploads/2012/02/prestman-main-logo2.png';
 ?>
+<br><br>
+<img src="<?php echo $image_url;?>">
 
 <hr/>
 
 <?php
-	echo "Enter Name, e-mail address, and select file to upload here for inventory information:";
+	echo "Welcome to the Prestman Auto Search Form" ;
+?>
+<br>
+<?php	
+	echo "<br>Enter Name, e-mail address, and select file to upload here for inventory information:";
 ?>
 
 	<!DOCTYPE HTML>  
 <html>
 <head>
-<style>
-.error {color: red;}
-</style>
+<link rel="stylesheet" type="text/css" href="stylesheets.css">
 </head>
 <body>  
 
@@ -25,7 +29,7 @@ $name = $email = $gender = $comment = $website = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (empty($_POST["name"])) {
-    $nameErr = "Name is required";
+    $nameErr = "";
   } else {
     $name = test_input($_POST["name"]);
     if (!preg_match("/^[a-zA-Z ]*$/",$name)) {
@@ -34,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
   
   if (empty($_POST["email"])) {
-    $emailErr = "Email is required";
+    $emailErr = "";
   } else {
     $email = test_input($_POST["email"]);
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -71,29 +75,22 @@ function test_input($data) {
 
 <hr>
 
-<?php
-echo 
-	"Your listed e-mail: " . 
-	$email;
-
-echo
-	$name . 
-	", your requested information was last processed at: " . 
-	date_default_timezone_set('America/Denver') .
-	date('H:i:s a l F jS Y');
-?>
-
 </body>
 </html>
 
-<br><br>
-
 <?php
-	echo "<table>"
+	if (isset($_POST['submit'])){
+		echo $name . ", your requested information was last generated at: " . date('h:i:s A' . 'm/d/Y') . '<br>';
+		echo "<br>Your listed e-mail: " . $email . "<br>" ;
 		foreach ($file as $line) {
-	// $csv[]=explode(',',$k);
-		list($Floor_Date, $Days_on_floor, $Last_Paid, $Floorplan, $vehicle_status, $vehicle_desc, $odometer, $Vin, $Stock_number, $Title_status, $Due_date, $Source, $Principal_balance, $fee, $interest, $cltrl_prt, $other, $total ) = explode(",", $line);
-			echo "<h2> $Stock_number, $vehicle_desc, $Days_on_floor, $Source </h2>";
-	echo "</table>";
-	}
+			echo "<table>";
+				echo "<th>";
+					echo "<td>";
+					list($Floor_Date, $Days_on_floor, $Last_Paid, $Floorplan, $vehicle_status, $vehicle_desc, $odometer, $Vin, $Stock_number, $Title_status, $Due_date, $Source, $Principal_balance, $fee, $interest, $cltrl_prt, $other, $total ) = explode(",", $line);
+					echo("</td>");
+				echo "</th>";		
+				echo "<h2> $Stock_number, $vehicle_desc, $Days_on_floor, $Source </h2>";
+			echo "</table>";
+		}
+	};
 ?>
