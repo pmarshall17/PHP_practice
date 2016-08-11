@@ -69,30 +69,31 @@ function test_input($data) {
   <input type="submit" name="submit" value="Submit">  
 </form>
 
+<hr>
+
 <?php
-echo $name . 
-		", your requested information was last processed at: " . 
-		date_default_timezone_set('America/Denver') .
-		date('H:i:s a l F jS Y');
+echo 
+	"Your listed e-mail: " . 
+	$email;
+
+echo
+	$name . 
+	", your requested information was last processed at: " . 
+	date_default_timezone_set('America/Denver') .
+	date('H:i:s a l F jS Y');
 ?>
 
 </body>
 </html>
 
-<hr/>
+<br><br>
 
 <?php
-
-
-foreach ($file as $line) {
+	echo "<table>"
+		foreach ($file as $line) {
 	// $csv[]=explode(',',$k);
-	// echo "$line<br>";
-	// 	list($Floor_Date, $sales, $sales1) = explode(",", $line);
-	// 	echo "<h1>$Floor_Date, $sales, $sales1</h1>";
-	$fileHandle = fopen("Nextgear.csv", "r");
-		while (($row = fgetcsv($fileHandle, 0, ",")) !== FALSE) {
-			var_dump($row);
-			echo $row[1];
-		}
+		list($Floor_Date, $Days_on_floor, $Last_Paid, $Floorplan, $vehicle_status, $vehicle_desc, $odometer, $Vin, $Stock_number, $Title_status, $Due_date, $Source, $Principal_balance, $fee, $interest, $cltrl_prt, $other, $total ) = explode(",", $line);
+			echo "<h2> $Stock_number, $vehicle_desc, $Days_on_floor, $Source </h2>";
+	echo "</table>";
 	}
 ?>
