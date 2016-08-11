@@ -17,15 +17,6 @@
     <input type="file" name="upload" />
     <input type="submit"/>
   </form>
-      
-   </body>
-</html>
-
-
-
-
-
-
 
 <hr/>
 
@@ -36,5 +27,17 @@ echo "Data Processed@";
 date_default_timezone_set('MST');
 
 echo date( 'H:i:s l F jS Y' );
+
+?>
+<br>
+
+<?php
+
+$file = file('Nextgear.csv');
+
+foreach ($file as $k) 
+	$csv[]=explode(',',$k);
+
+print_r($file);
 
 ?>
