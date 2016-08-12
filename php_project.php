@@ -80,17 +80,20 @@ function test_input($data) {
 
 <?php
 	if (isset($_POST['submit'])){
-		echo $name . ", your requested information was last generated at: " . date('h:i:s A' . 'm/d/Y') . '<br>';
+		echo $name . ", your requested information was last generated at: " . date('h:i:s A m/d/Y') . '<br>';
 		echo "<br>Your listed e-mail: " . $email . "<br>" ;
-		foreach ($file as $line) {
-			echo "<table>";
-				echo "<th>";
-					echo "<td>";
-					list($Floor_Date, $Days_on_floor, $Last_Paid, $Floorplan, $vehicle_status, $vehicle_desc, $odometer, $Vin, $Stock_number, $Title_status, $Due_date, $Source, $Principal_balance, $fee, $interest, $cltrl_prt, $other, $total ) = explode(",", $line);
-					echo("</td>");
-				echo "</th>";		
-				echo "<h2> $Stock_number, $vehicle_desc, $Days_on_floor, $Source </h2>";
-			echo "</table>";
+		echo "<br><html><body><table>\n\n";
+			foreach ($file as $line) {
+		echo "<tr>";
+			echo "<th>";
+				list($Floor_Date, $Days_on_floor, $Last_Paid, $Floorplan, $vehicle_status, $vehicle_desc, $odometer, $Vin, $Stock_number, $Title_status, $Due_date, $Source, $Principal_balance, $fee, $interest, $cltrl_prt, $other, $total ) = explode(",", $line);
+			echo "</th>";
+			echo "<td>" . "<h2>$vehicle_desc</h2>" . "</td>" .
+					 "<td>" . "<h2>$Source</h2>" . "<td>" .
+					 "<td>" . "<h2>$Stock_number</h2". "</td>" . 
+					 "<td>" . "<h2>$Days_on_floor</h2>" . "</td>";
+		echo "</tr>";
 		}
+		echo "\n</table></body></html>";
 	};
 ?>
